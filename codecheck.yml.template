@@ -1,0 +1,26 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147 for more information"
+
+paper:
+  title: ""
+  authors:
+    - name: 
+      ORCID: 
+    - name: 
+      ORCID: 
+  reference: https://doi.org/10.5194/agile-giss-6--2025
+
+codechecker:
+  - name: 
+    ORCID: 
+
+report: https://doi.org/10.17605/OSF.IO/
+summary: |
+    ...
+repository: ..
+check_time: "2025-mm-dd 12:00:00"
+certificate: 2025-xxx

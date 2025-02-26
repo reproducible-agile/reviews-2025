@@ -14,6 +14,13 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/
 
+# Install system depedency for tabulapdf
+RUN apt-get -y update && apt-get install -y \
+   default-jdk \
+   r-cran-rjava \
+   && apt-get clean \
+   && rm -rf /var/lib/apt/lists/
+
 ## Run install.R script
 COPY install.R ${HOME}
 RUN R --quiet -f install.R

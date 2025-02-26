@@ -25,8 +25,13 @@ The `Makefile`'s default target will create a virtual Python environment to exec
 
 ### 2. Start RStudio
 
-Then open the Jupyter UI at the link shown in the console.
-In the UI, go to "New" > "RStudio" to get an integrated development environment with the required dependencies.
+Open Jupyter by clicking on the link in the console.
+Then start RStudio by replacing the `/tree` part of the URL with `/rstudio`, e.g., <http://127.0.0.1:41647/rstudio> (note the port likely differs on your machine).
+Now you have an integrated development environment with the required dependencies.
+
+To render the 2025 reproducibility review website and run the text analysis of the submissions, open `agile-reproducibility-reviews.Rmd` and execute the code chunks.
+Note the parameters in the preamble, in particular `private: ...`.
+Never commit to git a generated HTML with the private information of submissions.
 
 ### 3. Prepare your report
 

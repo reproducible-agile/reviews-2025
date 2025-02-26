@@ -55,11 +55,12 @@ if(is.na(Sys.getenv("easychair_username", unset = NA)) || is.na(Sys.getenv("easy
 # https://stackoverflow.com/questions/23202522/r-httr-post-request-for-signing-in
 login_response <- NULL
 if(is.null(login_response)) {
-  login_response <- httr::POST(url = "https://easychair.org/account/verify",
+  login_response <- httr::POST(url = "https://easychair.org/account2/signin_x",
                          body = list(name = Sys.getenv("easychair_username"),
                                      password = Sys.getenv("easychair_password")),
                          encode = "form")
-}
+  cat("Logged in at EasyChair: ", toString(login_response))
+} # else already logged in
 ```
 
 ## Submitted papers
@@ -75,8 +76,8 @@ cr_path <- here::here("camera-ready-full-papers")
 ```
 
 ```{r conference_id, echo=FALSE}
-# get this from the URL when logged into EasyChair, e.g., https://easychair.org/conferences/submissions?a=32069676
-conference_id <- "32069676"
+# get this from the URL when logged into EasyChair, e.g., https://easychair.org/conferences/submissions?a=34091123
+conference_id <- "34091123"
 ```
 
 ### Submission metadata
@@ -86,30 +87,41 @@ The full submission information is not included in the public rendering of this 
 Make sure that the shown columns in the submission table include the columns required in the code below.
 
 ```{r submissions, echo=FALSE}
-submission_page <- httr::GET(url = paste0("https://easychair.org/conferences/submissions?a=", conference_id))
+submission_page <- httr::GET(url = paste0("https://easychair.org/conferences2/submissions?a=", conference_id))
+
+# Configure displayed fields; Note: the names here must match the fields available, which may differ each year, it's best to login in the browser and transfer the values from a request performed there using the developer console; alternatively, login in the browser at the same time with the same credentials and activate all the fields there
+fields_response <- httr::POST(url = "https://easychair.org/conferences/submission_field_hide_x.cgi?a=34091123",
+                         body = list(a = "34091123",
+                                     keywords = "on",
+                                     decision = "on",
+                                     time = "on",
+                                     visible = "65094",
+                                     visible = "65091",
+                                     visible = "65092",
+                                     visible = "65093",
+                                     button = "bf30720"))
+cat("Selected all fields: ", toString(fields_response))
+
 submission_html <- xml2::read_html(submission_page)
-submission_table_full <- html_node(submission_html, "#ec\\:table1")
-# remove first header row and set names manually later, because the vertical table headers are miages anyway
-xml_remove(xml_child(html_node(submission_table_full, "thead")))
+submission_table_full <- rvest::html_element(submission_html, ".ct_table")
+# remove first header row and set names manually later, because the vertical table headers are images anyway
+xml_remove(xml2::xml_child(rvest::html_element(submission_table_full, "thead")))
 submission_table <- rvest::html_table(x = submission_table_full,
                                       fill = TRUE)
-names(submission_table) <- c("id", "authors", "title",
-                             "information", "paper", "assigment", "update"
-                             , "NN", "NN"
-                             ,"type"
-                             ,"time"
-                             ,"decision"
-                             )
+#names(submission_table) <- c("id", "authors", "title", "information", "paper"
+#                             ,"anonymity", "dasa", "contribution_type", "ai_use"
+#                             ,"time", "decisions", "keywords")
 #warning("manually adding submission type, table does not have it this year")
-#submission_table$type <- c(rep("Full-paper submission", times = 26), rep("Short-paper submission", times = nrow(submission_table) - 26))
+submission_table$type <- rep("Full paper", times = nrow(submission_table))
 
-submission_table$id <- str_pad(submission_table$id, width = 3, side = "left", pad = "0")
-submission_table <- submission_table  %>%
+submission_table <-  submission_table %>%
+  mutate(id = str_pad(submission_table$`#`, width = 3, side = "left", pad = "0")) %>%
+  relocate(id, .before = `#`) %>%
   mutate_if(is.character, list(~na_if(.,"")))
 
-links <- html_nodes(submission_table_full, "a[href]") %>% html_attr("href")
+links <- rvest::html_elements(submission_table_full, "a[href]") %>% html_attr("href")
 submission_table$information <- paste("https://easychair.org",
-                                      links[str_detect(links, pattern = "submission_view")], sep = "")
+                                      links[stringr::str_detect(links, pattern = "submission_view")], sep = "")
 
 submission_table$submission_id <- str_match(submission_table$information, pattern = "submission=([[:digit:]]+)")[,2]
 submission_table$paper <- paste("https://easychair.org",
@@ -126,7 +138,7 @@ for (i in 1:nrow(submission_table)) {
 #submission_table <- submission_table[3:nrow(submission_table),]
 
 submission_table %>%
-  group_by(type) %>%
+  group_by(type) %>% # in 2025, posters and short papers are in a different id/page
   tally() %>%
   kable() %>%
   kable_styling("striped")
@@ -136,7 +148,7 @@ submission_table %>%
 ```{r submissions_full_metadata, echo=FALSE}
 if(params$private_info) {
   submission_table %>%
-    arrange(id) %>%
+    dplyr::arrange("#") %>%
     kable() %>%
     kable_styling("striped") %>%
     scroll_box(height = "480px")
@@ -181,14 +193,14 @@ The stop words include specific words, which might be included in the page heade
 texts <- list()
 for (i in 1:nrow(submission_table)) {
   current <- submission_table[i,]
-  cat("Reading ", current$file, "\n")
+  cat("Reading   ", current$file, "\n")
   the_text <- NA
   if(!is.na(current$file)) {
     tryCatch({
-      the_text <- tabulapdf::extract_text(current$file)
-      the_text <- str_c(the_text, collapse = TRUE)
+      the_text <- tabulapdf::extract_text(file = current$file)
+      the_text <- stringr::str_flatten(stringr::str_c(the_text))
       },
-      error = function(e) { warning("Text from ", current$id, " could not be loaded: ", toString(e))}
+      finally = cat("Done with ", current$file, "\n")
     )
   } else {
     warning("No text available for paper ", current$id, " ", current$title)
@@ -285,11 +297,11 @@ type_counts_totals$type <- c(#"Full-paper submission"
                              #, "Poster submission"
                              #, "Short-paper submission"
                              "Full paper"
-                             , "Poster"
-                             , "Short paper"
+                             #, "Poster"
+                             #, "Short paper"
                              )
 type_counts_totals <- paste(
-  paste(type_counts_totals$type, type_counts_totals$n, sep = ":"),
+  paste(type_counts_totals$type, type_counts_totals$n, sep = "s: "),
   collapse = "|")
 
 
@@ -304,6 +316,7 @@ if(!params$private_info) {
 }
 
 bind_rows(words_joined, summary_row) %>%
+  mutate("%" = round(`non-stop words` / words * 100, 1)) %>%
   kable() %>%
   kable_styling("striped", full_width = FALSE) %>%
   row_spec(nrow(words_joined) + 1, bold = TRUE) %>%
@@ -368,6 +381,27 @@ if(params$private_info) {
     scroll_box(height = "320px")
 }
 ```
+
+The following papers do _not_ have a DASA section based on the pattern matching above:
+
+```{r no_dasa_papers}
+right_join(submission_table,
+          tidy_texts %>% filter(!has_dasa),
+          by = "id") %>%
+  select(id, Title, file) %>%
+  arrange(id) %>%
+    kable() %>%
+    kable_styling("striped") %>%
+    scroll_box(height = "320px")
+```
+
+Manual inspection yielded the following details:
+
+- `054`: only has "Software Availability Section"
+- some papers were not using the submission template
+- `078`: only uses "Data Availability"
+- `095`: uses "Availability of data and software"
+- `102`: uses "Code and data availability"
 
 ### Wordstem analysis
 
@@ -514,7 +548,7 @@ There is "accept" and "conditionally accept" (after second review)!
 ```{r scrape_accepted, echo=FALSE, eval=params$private_info}
 submission_table %>%
   filter(type == "Full paper") %>%
-  group_by(decision) %>%
+  group_by(Decisions) %>%
   summarise(count = n()) %>%
   kable() %>%
   kable_styling("striped")
@@ -523,7 +557,7 @@ submission_table %>%
 ```{r compile review data, echo=FALSE, eval=params$private_info}
 #page <- httr::GET(url = "https://easychair.org/conferences/status?a=26091618")
 #review_status_page <- xml2::read_html(page)
-#review_table <- rvest::html_table(html_nodes(review_status_page, ".paperTable")[[1]], header = TRUE)
+#review_table <- rvest::html_table(rvest::html_elements(review_status_page, ".paperTable")[[1]], header = TRUE)
 #names(review_table)[4] <- "average"
 #names(review_table)[1] <- "id"
 #review_table$id <- str_pad(review_table$id, width = 3, side = "left", pad = "0")
@@ -533,7 +567,7 @@ submission_table %>%
 #  tidyr::separate(col = title, into = c("authors","title"), sep = "\\.+?", extra = "merge")
 #
 ## the tr element of the review table has the internal paper ID in format "r4789577"
-#review_table$internal_id <- sapply(X = html_nodes(review_status_page, css = ".paperTable tr[id]"), FUN = function(row) {
+#review_table$internal_id <- sapply(X = rvest::html_elements(review_status_page, css = ".paperTable tr[id]"), FUN = function(row) {
 #  substr(html_attr(row, "id"), 2, 999)
 #})
 
@@ -541,7 +575,7 @@ review_data <- left_join(submission_table, dasa_texts %>% select(-type),
                          by = "id")
 
 accepted_papers <- review_data %>%
-    dplyr::filter(decision == "ACCEPT" | decision == "accept?") %>%
+    dplyr::filter(Decisions == "ACCEPT" | Decisions == "accept?") %>%
     filter(type == "Full paper") %>%
     arrange(id) %>%
     kable() %>%
@@ -560,8 +594,11 @@ if(params$private_info) {
 ```{r accepted_no_dasa, eval=params$private_info}
 review_data %>%
   filter(type == "Full paper") %>%
-  dplyr::filter(decision == "ACCEPT", is.na(`dasa_text`)) %>%
-  select(id, title, authors)
+  dplyr::filter(Decisions == "ACCEPT", is.na(`dasa_text`)) %>%
+  select(id,
+         Title,
+         #authors
+         )
 ```
 
 ### Which papers have a link to the reproducibility review
@@ -620,8 +657,8 @@ review_data_csv_file <- file.path(review_files_path, paste0("review_data_", lubr
 ```{r accepted_fp_files_download_easychair, echo=FALSE, eval=params$private_info}
 review_files <- review_data %>%
   filter(type == "Full paper") %>%
-  dplyr::filter(decision == "ACCEPT") %>%
-  select(id, submission_id, decision, title, file, paper)
+  dplyr::filter(Decisions == "ACCEPT") %>%
+  select(id, submission_id, Decisions, Title, file, paper)
 
 # first, re-download all accepted full paper PDFs to make sure we have latest copies
 for (i in 1:nrow(review_files)) {
@@ -666,10 +703,10 @@ retrieve_review <- function(id, submission_id) {
   url <- parse_url("https://easychair.org/conferences/submission_reviews")
   url$query <- list(submission = submission_id, a = conference_id)
   response <- httr::GET(url = build_url(url))
-  content <- content(response)
+  content <- httr::content(response)
   page_title <- as.character(
-    xml_contents(
-      html_node(
+    xml2::xml_contents(
+      rvest::html_element(
         content(response), "title")))
   if(grepl("Log in", page_title))
      stop("You must (re)login to EasyChair")
@@ -750,8 +787,8 @@ retrieve_authors <- function(id, submission_id, authors, title) {
   response <- httr::GET(url = build_url(url))
   content <- content(response)
   page_title <- as.character(
-    xml_contents(
-      html_node(
+    xml2::xml_contents(
+      rvest::html_element(
         content(response), "title")))
   if(grepl("Log in", page_title))
      stop("You must (re)login to EasyChair")
@@ -852,7 +889,7 @@ if (params$private_info) {
   # put accepted full papers to private share
   library("googledrive")
   googledrive::drive_auth(use_oob = TRUE)
-  submissions_and_reviews <- "https://drive.google.com/drive/folders/1ghOSXTD6RzgRPd21-sK482pWrsHU1Ors"
+  submissions_and_reviews <- "https://drive.google.com/drive/folders/1bvNMoBJDfEFOPb4g0d66p7rxd9lwIAV6"
   
   
   # upload review data file for manual import (see above)

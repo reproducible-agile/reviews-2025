@@ -4,3 +4,23 @@
 .Ruserdata
 
 .venv/
+
+.Renviron
+
+.cache/
+
+.config/
+
+.ipynb_checkpoints/
+
+.ipython/
+
+.jupyter/
+
+.local/
+
+.pdfbox.cache
+
+submissions/
+
+review-material/

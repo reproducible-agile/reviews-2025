@@ -10,6 +10,8 @@ params:
   private_info: yes
 ---
 
+![](https://reproducible-agile.github.io/public/images/reproducible-AGILE-logo-square.svg){width=50%}
+
 ## Introduction
 
 This document includes scripts and text analysis to support the reproducibility review at the [AGILE conference 2025](https://agile-gi.eu/conference-2025), which is organised by the team of the Chair for Geoinformatics, TU Dresden, Germany.
@@ -17,6 +19,7 @@ This document includes scripts and text analysis to support the reproducibility 
 Find out more online [about reproducible publications at AGILE](https://doi.org/10.17605/OSF.IO/PHMCE) and the [review process](https://osf.io/eg4qx/), and visit the Reproducible AGILE website: [https://reproducible-agile.github.io/](https://reproducible-agile.github.io/).
 The code of this document is published on GitHub in the repository [reproducible-agile/reviews-2025](https://github.com/reproducible-agile/reviews-2025), where you can inspect the R code in the file `agile-reproducibility-reviews.Rmd` and find instructions for reproducing the workflow.
 The [report parameter](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html) `private_info` can be set to `yes` to show information which cannot be shared publicly, such as author names, titles, or excerpts of not accepted submissions, and to upload review files to private shares, which requires authentication.
+The end of this document contains a hidden code snippet to only render information accepted for publication as a GitHub page.
 
 
 ```{r load_libraries, message=FALSE, warning=FALSE, include=FALSE}
@@ -59,13 +62,13 @@ if(is.null(login_response)) {
                          body = list(name = Sys.getenv("easychair_username"),
                                      password = Sys.getenv("easychair_password")),
                          encode = "form")
-  cat("Logged in at EasyChair: ", toString(login_response))
+  #cat("Logged in at EasyChair: ", toString(login_response))
 } # else already logged in
 ```
 
 ## Submitted papers
 
-```{r local_paths, echo=FALSE}
+```{r local_paths, echo=params$private_info}
 submissions_path <- here::here("submissions")
 dir.create(submissions_path, recursive = TRUE, showWarnings = FALSE)
 
@@ -75,7 +78,7 @@ dir.create(review_files_path, recursive = TRUE, showWarnings = FALSE)
 cr_path <- here::here("camera-ready-full-papers")
 ```
 
-```{r conference_id, echo=FALSE}
+```{r conference_id, echo=params$private_info}
 # get this from the URL when logged into EasyChair, e.g., https://easychair.org/conferences/submissions?a=34091123
 conference_id <- "34091123"
 ```
@@ -86,7 +89,7 @@ Retrieve all information about submissions from the EasyChair submissions system
 The full submission information is not included in the public rendering of this report.
 Make sure that the shown columns in the submission table include the columns required in the code below.
 
-```{r submissions, echo=FALSE}
+```{r submissions, echo=FALSE, message=FALSE}
 submission_page <- httr::GET(url = paste0("https://easychair.org/conferences2/submissions?a=", conference_id))
 
 # Configure displayed fields; Note: the names here must match the fields available, which may differ each year, it's best to login in the browser and transfer the values from a request performed there using the developer console; alternatively, login in the browser at the same time with the same credentials and activate all the fields there
@@ -100,7 +103,7 @@ fields_response <- httr::POST(url = "https://easychair.org/conferences/submissio
                                      visible = "65092",
                                      visible = "65093",
                                      button = "bf30720"))
-cat("Selected all fields: ", toString(fields_response))
+#cat("Selected all fields: ", toString(fields_response))
 
 submission_html <- xml2::read_html(submission_page)
 submission_table_full <- rvest::html_element(submission_html, ".ct_table")
@@ -155,7 +158,7 @@ if(params$private_info) {
 }
 ```
 
-### Load texts
+### Full texts
 
 The paper PDFs are downloaded from EasyChair directly using the links provided in the submission overview table.
 
@@ -193,14 +196,16 @@ The stop words include specific words, which might be included in the page heade
 texts <- list()
 for (i in 1:nrow(submission_table)) {
   current <- submission_table[i,]
-  cat("Reading   ", current$file, "\n")
+  #cat("Reading   ", current$file, "\n")
   the_text <- NA
   if(!is.na(current$file)) {
     tryCatch({
       the_text <- tabulapdf::extract_text(file = current$file)
       the_text <- stringr::str_flatten(stringr::str_c(the_text))
       },
-      finally = cat("Done with ", current$file, "\n")
+      finally = {
+        #cat("Done with ", current$file, "\n")
+      }
     )
   } else {
     warning("No text available for paper ", current$id, " ", current$title)
@@ -273,6 +278,7 @@ total_words = nrow(all_words)
 after_cleanup = nrow(no_stop_words)
 ```
 
+`r nrow(tidy_texts)` papers successfully read.
 About `r round(after_cleanup/total_words * 100, digits = 0)`&nbsp;% of the words are considered stop words.
 
 The following table shows how many words and non-stop words each document has, sorted by number of non-stop words.
@@ -382,9 +388,11 @@ if(params$private_info) {
 }
 ```
 
+`r if(!params$private_info) {"<!--"}`
+
 The following papers do _not_ have a DASA section based on the pattern matching above:
 
-```{r no_dasa_papers}
+```{r no_dasa_papers, echo=FALSE, eval=params$private_info}
 right_join(submission_table,
           tidy_texts %>% filter(!has_dasa),
           by = "id") %>%
@@ -402,6 +410,8 @@ Manual inspection yielded the following details:
 - `078`: only uses "Data Availability"
 - `095`: uses "Availability of data and software"
 - `102`: uses "Code and data availability"
+
+`r if(!params$private_info) {"-->"}`
 
 ### Wordstem analysis
 
@@ -541,6 +551,8 @@ word_counts_sums %>%
 
 ## Accepted full papers
 
+`r if(!params$private_info) {"<!--"}`
+
 ### Full paper decisions
 
 There is "accept" and "conditionally accept" (after second review)!
@@ -553,6 +565,8 @@ submission_table %>%
   kable() %>%
   kable_styling("striped")
 ```
+
+`r if(!params$private_info) {"-->"}`
 
 ```{r compile review data, echo=FALSE, eval=params$private_info}
 #page <- httr::GET(url = "https://easychair.org/conferences/status?a=26091618")
@@ -591,7 +605,9 @@ if(params$private_info) {
 
 ### Which accepted papers do still not hava a DASA section
 
-```{r accepted_no_dasa, eval=params$private_info}
+`r if(!params$private_info) {"-->"}`
+
+```{r accepted_no_dasa, echo=FALSE, eval=params$private_info}
 review_data %>%
   filter(type == "Full paper") %>%
   dplyr::filter(Decisions == "ACCEPT", is.na(`dasa_text`)) %>%
@@ -601,13 +617,17 @@ review_data %>%
          )
 ```
 
+`r if(!params$private_info) {"<!--"}`
+
 ### Which papers have a link to the reproducibility review
 
 _Does not work reliably yet._
 **_Furthermore, this is not critical anymore because Copernicus now adds a reference to the reproducibility reports._**
 These are the papers where the reproducibility review resulted in at least partially successful reproduction.
 
-```{r report_links, eval=params$private_info}
+`r if(!params$private_info) {"-->"}`
+
+```{r report_links, echo=FALSE, eval=params$private_info}
 # hope that at least on of the phrases is not stretched across multiple spaces
 report_pattern <- regex("(AGILE[:space:]reproducibility[:space:]review|reproducibility[:space:]report)", ignore_case = TRUE)
 tidy_texts <- tidy_texts %>%
@@ -637,6 +657,8 @@ report_texts %>%
 The assignment of reviews is done via a privately shared spreadsheet, to handle potential non-public comments.
 The main outcome of the reviews is a _report_, which is published in individual OSF projects as components of the [OSF project for the reproducibility reviews 2025](https://osf.io/t8qw5/).
 The report should be based on a template from this repository in [`report-template`](report-template).
+
+`r if(!params$private_info) {"<!--"}`
 
 ### Prepare data for reviewers
 
@@ -920,7 +942,7 @@ if (params$private_info) {
 
 ### Prepare CSV with titles and DOIs for publisher
 
-```{r csv_for_publisher}
+```{r csv_for_publisher, eval=params$private_info}
 if(params$private_info) {
   googlesheets4::range_read(
     ss = "https://docs.google.com/spreadsheets/d/16DuExJqtp_fI3FLlOWOVRZQXyOYU1W3FCm9dgLlfRqk",
@@ -972,7 +994,7 @@ if(params$private_info) {
     - On OSF
         - Mint a DOI (double check if it is correct in the report)
 
-### Author contact templates
+### Email templates for contacting authors
 
 #### Reminder DASA by reproducibility chair
 
@@ -1078,10 +1100,16 @@ sessionInfo()
 ```
 
 ```{r render_public_version, eval=FALSE, include=FALSE}
+# Render public version to be published as a GitHub page (which must be activated for the /docs directory in the repository settings)
+unlink("docs/", recursive = TRUE)
 rmarkdown::render(input = "agile-reproducibility-reviews.Rmd",
                   params = list(private_info = FALSE),
                   output_dir = here::here("docs/"),
-                  output_format = rmarkdown::html_document(toc = TRUE, self_contained = FALSE))
+                  output_file = "index.html",
+                  output_format = rmarkdown::html_document(toc = TRUE,
+                                                           self_contained = FALSE # not self-contained to better track changes in generated HTML
+                                                           )
+                  )
 ```
 
 ```{r upload_to_drive, eval=FALSE, include=FALSE}

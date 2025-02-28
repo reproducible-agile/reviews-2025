@@ -80,7 +80,7 @@ cr_path <- here::here("camera-ready-full-papers")
 
 ```{r conference_id, echo=params$private_info}
 # get this from the URL when logged into EasyChair, e.g., https://easychair.org/conferences/submissions?a=34091123
-conference_id <- "34091123"
+conference_id <- "33640409"
 ```
 
 ### Submission metadata
@@ -192,6 +192,8 @@ submission_table
 The text is extracted from PDFs and it is processed to create a [tidy](https://www.jstatsoft.org/article/view/v059i10) data structure without [stop words](https://en.wikipedia.org/wiki/Stop_words).
 The stop words include specific words, which might be included in the page header, abbreviations, and terms particular to scientific articles, such as `figure`.
 
+If there are issues with loading the PDF, you may try to convert the PDF to `.ps` Postscript and back, e.g., using a combination of "Print to file > Postscript" in a PDF viewer and then `ps2pdf` on the command line.
+
 ```{r tidy_data, echo=FALSE}
 texts <- list()
 for (i in 1:nrow(submission_table)) {
@@ -202,6 +204,9 @@ for (i in 1:nrow(submission_table)) {
     tryCatch({
       the_text <- tabulapdf::extract_text(file = current$file)
       the_text <- stringr::str_flatten(stringr::str_c(the_text))
+      },
+      error = function(e) {
+        cat("Error loading PDF for ", toString(current), "\n\n", toString(e))
       },
       finally = {
         #cat("Done with ", current$file, "\n")
@@ -549,13 +554,15 @@ word_counts_sums %>%
 
 ------
 
-## Accepted full papers
-
 `r if(!params$private_info) {"<!--"}`
+
+## Accepted full papers
 
 ### Full paper decisions
 
 There is "accept" and "conditionally accept" (after second review)!
+
+`r if(!params$private_info) {"-->"}`
 
 ```{r scrape_accepted, echo=FALSE, eval=params$private_info}
 submission_table %>%
@@ -565,8 +572,6 @@ submission_table %>%
   kable() %>%
   kable_styling("striped")
 ```
-
-`r if(!params$private_info) {"-->"}`
 
 ```{r compile review data, echo=FALSE, eval=params$private_info}
 #page <- httr::GET(url = "https://easychair.org/conferences/status?a=26091618")

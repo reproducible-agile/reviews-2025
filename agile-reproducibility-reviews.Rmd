@@ -1032,6 +1032,16 @@ if(params$private_info) {
     - On OSF
         - Mint a DOI (double check if it is correct in the report)
 
+### Reproducibility chair instructions
+
+1. Create a repository like this one based on the previous year
+1. Screen the accepted papers
+1. Distribute the reproductions amongst the committee members
+1. After report publication
+    - Add reports on ResearchEquals to the collections [Reproducible AGILE](https://doi.org/10.53962/nxah-m4) and [CODECHECK](https://doi.org/10.53962/qtrx-1a)
+    - Coordinate on the creation of `codecheck.yml` configuration files
+    - Add the reports to the CODECHECK register
+
 ### Email templates for contacting authors
 
 #### Reminder DASA by reproducibility chair

@@ -340,7 +340,7 @@ According the the [AGILE Reproducible Paper Guidelines](https://osf.io/c8gtq/), 
 This detection naturally relies on the loaded texts _with_ stop words.
 
 ```{r dasa_section, echo=FALSE}
-dasa_pattern <- regex("(Data and Software Availability|Software and Data Availability)", ignore_case = TRUE)
+dasa_pattern <- regex("Data and Software Availability", ignore_case = TRUE)
 tidy_texts <- tidy_texts %>%
   mutate(has_dasa = str_detect(tidy_texts$text, pattern = dasa_pattern))
 
@@ -379,8 +379,41 @@ dasa_stats %>%
   kable_styling("striped")
 ```
 
+Some papers might have slightly different terms because of human error or misinterpretation of the template or the guidelines.
+
+```{r dasa_section_similar, echo=FALSE}
+dasa_similar_pattern <- regex("(Data Availability|Software and Data Availability|Code and Data Availiability|Data and Code Availability|Code Availability)", ignore_case = TRUE)
+tidy_texts_nodasa <- tidy_texts %>%
+  filter(has_dasa == FALSE)
+tidy_texts_similar <- tidy_texts_nodasa %>%
+  filter(has_dasa == FALSE) %>%
+  mutate(has_dasa_similar = str_detect(tidy_texts_nodasa$text, pattern = dasa_similar_pattern))
+
+dasa_similar_count <- tidy_texts_similar %>%
+  filter(has_dasa_similar) %>%
+  nrow()
+
+excerpt_length <- max(nchar(stringr::str_split_1(string = as.character(dasa_similar_pattern), pattern = "\\|")))
+dasa_similar_texts <- tidy_texts_similar %>%
+  filter(has_dasa_similar) %>%
+  mutate(start = str_locate(.data$text, pattern = dasa_similar_pattern)[,1]) %>%
+  mutate(excerpt = str_sub(.data$text, start = start, end = start + excerpt_length)) %>%
+  select(id, type, excerpt)
+```
+
+`r dasa_similar_count` papers do not have a DASA section but have possible related sections in question.
+These are excerpts of the similarly matched patterns, which were found anywhere in the text, not just in headlines.
+
+```{r dasa_similar_section_table_md, echo=FALSE}
+dasa_similar_texts %>%
+  arrange(id) %>%
+  kable() %>%
+  kable_styling("striped") %>%
+  scroll_box(height = "320px")
+```
+
 `r if(!params$private_info) {"<!--"}`
-The following table shows the first `r excerpt_length` characters of these sections.
+The following table shows the first `r excerpt_length` characters of the found DASA sections.
 `r if(!params$private_info) {"-->"}`
 
 ```{r dasa_section_table_md, echo=FALSE, eval=params$private_info}

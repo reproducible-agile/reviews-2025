@@ -441,14 +441,6 @@ right_join(submission_table,
     scroll_box(height = "320px")
 ```
 
-Manual inspection yielded the following details:
-
-- `054`: only has "Software Availability Section"
-- some papers were not using the submission template
-- `078`: only uses "Data Availability"
-- `095`: uses "Availability of data and software"
-- `102`: uses "Code and data availability"
-
 `r if(!params$private_info) {"-->"}`
 
 ### Wordstem analysis
@@ -627,7 +619,7 @@ review_data <- left_join(submission_table, dasa_texts %>% select(-type),
                          by = "id")
 
 accepted_papers <- review_data %>%
-    dplyr::filter(Decisions == "ACCEPT" | Decisions == "accept?") %>%
+    dplyr::filter(Decisions == "ACCEPT") %>%
     filter(type == "Full paper") %>%
     arrange(id) %>%
     kable() %>%
@@ -734,9 +726,9 @@ for (i in 1:nrow(review_files)) {
 # Use this chunk if camera ready files are not managed via EasyChair
 review_files <- review_data %>%
   filter(type == "Full paper") %>%
-  dplyr::filter(decision == "ACCEPT") %>%
+  dplyr::filter(Decisions == "ACCEPT") %>%
   dplyr::mutate(file = stringr::str_replace(.$file, pattern = "submissions", replacement = "camera-ready-full-papers")) %>%
-  select(id, submission_id, decision, authors, title, file, paper)
+  select(id, submission_id, Decisions, authors, title, file, paper)
 
 # copy camera ready files to upload directory
 for (i in 1:nrow(review_files)) {
@@ -983,7 +975,7 @@ if (params$private_info) {
 ```{r csv_for_publisher, eval=params$private_info}
 if(params$private_info) {
   googlesheets4::range_read(
-    ss = "https://docs.google.com/spreadsheets/d/16DuExJqtp_fI3FLlOWOVRZQXyOYU1W3FCm9dgLlfRqk",
+    ss = "https://docs.google.com/spreadsheets/d/1q_oOQtv0m5gsKpCtTLhgyfbEMOBCC3dFw6M00mzyNYc/edit",
     range =  "review_data!A:F"
     ) %>%
     select(`ID`, `Title`, `Report DOI`) %>%
@@ -996,13 +988,13 @@ if(params$private_info) {
 
 ### Reproducibility reviewer instructions
 
-1. Familiarise yourself with the [AGILE Reproducibility Review Process](https://docs.google.com/document/d/1JHCQV7GP3YkKwp0Nii3dt3p3Y45hU56Xz2cr-xJVz34/edit#heading=h.oheeg2s92zdm); the following steps are just a tl;dr version
-2. Take a look at the [review report template](https://github.com/reproducible-agile/reviews-2025/blob/master/report-template/reproreview-template.Rmd) - even if you're not using it, it gives you guidance
-3. Go to the [Discoure forum discussion for reproducibility reviewers](https://discourse.agile-online.org/c/repro-review-2023/9) and find your assignments
+1. Familiarise yourself with the [AGILE Reproducibility Review Process](https://docs.google.com/document/d/1JHCQV7GP3YkKwp0Nii3dt3p3Y45hU56Xz2cr-xJVz34/edit#heading=h.oheeg2s92zdm); refresh your memory of the [_Reproducibility Reviewer Guidelines_ in the Reproducible Paper Guidelines](https://doi.org/10.17605/OSF.IO/CB7Z8) the following steps are just a tl;dr version
+2. Take a look at the [RMarkdown review report template](https://github.com/reproducible-agile/reviews-2025/blob/master/report-template/reproreview-template.Rmd) - even if you're not using it, it gives you guidance on structure and content, you are welcome to write your report with any tool that can produce a PDF
+3. Go to the [shared spreadsheet reproducibility reviewers](https://docs.google.com/spreadsheets/d/1q_oOQtv0m5gsKpCtTLhgyfbEMOBCC3dFw6M00mzyNYc/edit?gid=1766356109#gid=1766356109) and find your assignments
 4. Conduct your reproducibility review and write the report
     - Don't forget to take a look at the scientific reviews for comments on reproducibility; do _not_ worry about the science or read the full paper, unless it really interests you
-    - Check the authors and their affiliations of the submission - is there a relation (e.g., former colleague, current supervisor) that may be seen as inappropriate for you as a reproducibility reviewer? Is there a conflict of interest? If so, please contact the reproducibility chair, and ask in the Discourse forum if another reproducibility reviewer would be available to switch assignments
-    - If code is available on GitHub/Lab, please fork the project into the [Reproducible AGILE organisation](https://github.com/reproducible-agile/) respectively the [GitLab subgroup "reviews"](https://gitlab.com/reproducible-agile/reviews) and immediately "archive" the project so that it becomes read-only ([instructions GitHub](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-archiving-repositories), [instructions for GitLab](https://docs.gitlab.com/ee/user/project/settings/#archiving-a-project)); ask Daniel to get the permissions for the organisations
+    - Check the authors and their affiliations of the submission - is there a relation (e.g., former colleague, current supervisor) that may be seen as inappropriate for you as a reproducibility reviewer? Is there a conflict of interest? If so, please contact the reproducibility chair, and ask via email to the committee members if another reproducibility reviewer would be available to switch assignments
+    - If code is available on GitHub/Lab, please fork the project into the [Reproducible AGILE organisation](https://github.com/reproducible-agile/) respectively the [GitLab subgroup "reviews"](https://gitlab.com/reproducible-agile/reviews); ask Daniel to get the permissions for the organisations
     - If need be, limit the review scope, e.g. reproduce only a specific figure; the reproducibility review should not take you longer (not counting computation time) than a scientific review, and even computation times should not expand longer than a working day
 5. Send the report to the original authors of the paper and add the reproducibility chair in CC, see template below;
 7. Add a new component to the [OSF project for 2025 reproducibility reviews](https://osf.io/t8qw5/) *OR* create a new module on [ResearchEquals](https://www.researchequals.com)
@@ -1041,6 +1033,7 @@ if(params$private_info) {
     - Add reports on ResearchEquals to the collections [Reproducible AGILE](https://doi.org/10.53962/nxah-m4) and [CODECHECK](https://doi.org/10.53962/qtrx-1a)
     - Coordinate on the creation of `codecheck.yml` configuration files
     - Add the reports to the CODECHECK register
+    - "Archive" the projects on GitHub so that they becomee read-only ([instructions GitHub](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-archiving-repositories), [instructions for GitLab](https://docs.gitlab.com/ee/user/project/settings/#archiving-a-project))
 
 ### Email templates for contacting authors
 

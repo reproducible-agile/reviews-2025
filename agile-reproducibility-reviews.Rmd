@@ -79,8 +79,9 @@ cr_path <- here::here("camera-ready-full-papers")
 ```
 
 ```{r conference_id, echo=params$private_info}
-# get this from the URL when logged into EasyChair, e.g., https://easychair.org/conferences/submissions?a=34091123
-conference_id <- "33640409"
+# get this from the URL when logged into EasyChair, e.g., https://easychair.org/conferences2/submissions?a=34212104
+conference_id <- "34212104"
+# regular conference ID is "33640409", the above seems to be only for track chairs
 ```
 
 ### Submission metadata
@@ -156,6 +157,9 @@ if(params$private_info) {
     kable_styling("striped") %>%
     scroll_box(height = "480px")
 }
+
+# in interactive notebook, just look at
+#submission_table
 ```
 
 ### Full texts
@@ -690,7 +694,7 @@ The report should be based on a template from this repository in [`report-templa
 
 `r if(!params$private_info) {"<!--"}`
 
-### Prepare data for reviewers
+### Prepare reproducibility packages for reviewers
 
 #### Overview and files
 
@@ -728,7 +732,7 @@ review_files <- review_data %>%
   filter(type == "Full paper") %>%
   dplyr::filter(Decisions == "ACCEPT") %>%
   dplyr::mutate(file = stringr::str_replace(.$file, pattern = "submissions", replacement = "camera-ready-full-papers")) %>%
-  select(id, submission_id, Decisions, authors, title, file, paper)
+  select(id, submission_id, Decisions, Authors, Title, file, paper) # note: you might have to adjust column names here between the years
 
 # copy camera ready files to upload directory
 for (i in 1:nrow(review_files)) {
@@ -740,7 +744,7 @@ for (i in 1:nrow(review_files)) {
 
 ```{r review_data_csv, echo=FALSE, eval=params$private_info}
 readr::write_csv(review_files %>%
-                   select(ID = id, Decision = decision, Title = title),
+                   select(ID = id, Decisions, Title),
                  file = review_data_csv_file,
                  append = FALSE)
 ```
@@ -832,9 +836,9 @@ for(i in c(1:nrow(review_files))) {
 #### Author contacts
 
 ```{r author_contacts, echo=FALSE, eval=params$private_info}
-# Example page: https://easychair.org/conferences/submission_view?a=26091618;submission=5333543
+# Example page: https://easychair.org/conferences2/submission_view?a=26091618;submission=5333543
 retrieve_authors <- function(id, submission_id, authors, title) {
-  url <- parse_url("https://easychair.org/conferences/submission_view")
+  url <- parse_url("https://easychair.org/conferences2/submission_view")
   url$query <- list(submission = submission_id, a = conference_id)
   response <- httr::GET(url = build_url(url))
   content <- content(response)
@@ -888,8 +892,8 @@ retrieve_authors <- function(id, submission_id, authors, title) {
                                            xpath = "//div[@class='pagetitle']"))
   
   xml2::xml_add_child(authors_body,
-                      xml2::xml_find_first(content,
-                                           xpath = "//table[@id='ec:table2']"))
+                      xml2::xml_find_all(content,
+                                           xpath = "//table[@class='ct_table']")[[2]]) # Authors are the second table on the page
   
   # make clickable email links and extract author names
   authors_table <- xml2::xml_find_all(authors_body, xpath = "//tr[@class='green']")
@@ -915,22 +919,22 @@ retrieve_authors <- function(id, submission_id, authors, title) {
     glue::glue_collapse(x = emails, sep = ";"),
     "?subject=AGILE conference reproducibility review for submission ",
     id,
-    "&cc=daniel.nuest@tu-dresden.de",
+    "&cc=daniel.nuest@tu-dresden.de;carlos.granell@uji.es;f.o.ostermann@utwente.nl",
     "&body=Dear ", authors, ",",
     "%0D%0A%0D%0AYour submission '", title, "'"
   ))
-  xml2::xml_text(link_xml) <- "Send email to authors (CC reproducibility chair)"
+  xml2::xml_text(link_xml) <- "Send email to authors (CC reproducibility chair(s))"
   
   authors_html_path <- file.path(review_files_path, paste0(id, "_authors.html"))
   xml2::write_html(authors_doc, authors_html_path, encoding = "ISO-8859-1")
   authors_html_path
 }
 
-#test_id <- 17
-#retrieve_authors(review_files[test_id,]$id, review_files[test_id,]$submission_id, review_files[test_id,]$authors, review_files[test_id,]$title)
+#test_id <- 8
+#retrieve_authors(review_files[test_id,]$id, review_files[test_id,]$submission_id, review_files[test_id,]$Authors, review_files[test_id,]$Title)
 
 for(i in c(1:nrow(review_files))) {
-  retrieve_authors(review_files[i,]$id, review_files[i,]$submission_id, review_files[i,]$authors, review_files[i,]$title)
+  retrieve_authors(review_files[i,]$id, review_files[i,]$submission_id, review_files[i,]$Authors, review_files[i,]$Title) # capitalization matters here, match column names!
 }
 ```
 

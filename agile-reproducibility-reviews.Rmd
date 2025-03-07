@@ -993,15 +993,19 @@ if(params$private_info) {
 ### Reproducibility reviewer instructions
 
 1. Familiarise yourself with the [AGILE Reproducibility Review Process](https://docs.google.com/document/d/1JHCQV7GP3YkKwp0Nii3dt3p3Y45hU56Xz2cr-xJVz34/edit#heading=h.oheeg2s92zdm); refresh your memory of the [_Reproducibility Reviewer Guidelines_ in the Reproducible Paper Guidelines](https://doi.org/10.17605/OSF.IO/CB7Z8) the following steps are just a tl;dr version
-2. Take a look at the [RMarkdown review report template](https://github.com/reproducible-agile/reviews-2025/blob/master/report-template/reproreview-template.Rmd) - even if you're not using it, it gives you guidance on structure and content, you are welcome to write your report with any tool that can produce a PDF
-3. Go to the [shared spreadsheet reproducibility reviewers](https://docs.google.com/spreadsheets/d/1q_oOQtv0m5gsKpCtTLhgyfbEMOBCC3dFw6M00mzyNYc/edit?gid=1766356109#gid=1766356109) and find your assignments
-4. Conduct your reproducibility review and write the report
+1. Take a look at the [review report templates](https://github.com/reproducible-agile/reviews-2025/blob/master/report-template/) in RMarkdown and Office (.docx & .odt) - even if you're not using it, it gives you guidance on structure and content; you are welcome to write your report with any tool that can produce a PDF
+1. Go to the [shared spreadsheet reproducibility reviewers](https://docs.google.com/spreadsheets/d/1q_oOQtv0m5gsKpCtTLhgyfbEMOBCC3dFw6M00mzyNYc/edit?gid=1766356109#gid=1766356109) and find your assignments
+1. Access your _reproducibility package_ from the [shared cloud folder](https://drive.google.com/drive/folders/1bvNMoBJDfEFOPb4g0d66p7rxd9lwIAV6?usp=drive_link), which includes the following files named using the submission identifier, here using `000` as example:
+    - `000.pdf` - the submission manuscript (may be updated when authors upload new reports, ideally though you receive revisions directly from the authors)
+    - `000_authors.html` - an HTML file with author names and a handy link to write a message to all authors CC'ing the reproducibility committee chair(s)
+    - `000_reviews.html` - the scientific reviews with reviewer names redacted - useful to consider to be prepared for upcoming changes in the submission and to check for comments on data, code, software, or even reproducibility
+1. **Conduct your reproducibility review and write the report**
     - Don't forget to take a look at the scientific reviews for comments on reproducibility; do _not_ worry about the science or read the full paper, unless it really interests you
     - Check the authors and their affiliations of the submission - is there a relation (e.g., former colleague, current supervisor) that may be seen as inappropriate for you as a reproducibility reviewer? Is there a conflict of interest? If so, please contact the reproducibility chair, and ask via email to the committee members if another reproducibility reviewer would be available to switch assignments
     - If code is available on GitHub/Lab, please fork the project into the [Reproducible AGILE organisation](https://github.com/reproducible-agile/) respectively the [GitLab subgroup "reviews"](https://gitlab.com/reproducible-agile/reviews); ask Daniel to get the permissions for the organisations
     - If need be, limit the review scope, e.g. reproduce only a specific figure; the reproducibility review should not take you longer (not counting computation time) than a scientific review, and even computation times should not expand longer than a working day
-5. Send the report to the original authors of the paper and add the reproducibility chair in CC, see template below;
-7. Add a new component to the [OSF project for 2025 reproducibility reviews](https://osf.io/t8qw5/) *OR* create a new module on [ResearchEquals](https://www.researchequals.com)
+1. Send the report to the original authors of the paper and add the reproducibility chair in CC, see template below;
+1. Add a new component to the [OSF project for 2025 reproducibility reviews](https://osf.io/t8qw5/) *OR* create a new module on [ResearchEquals](https://www.researchequals.com)
     - **On OSF**
         - Use the European storage location, "Frankfurt"
         - Name the component `Reproducibility review of: <FULL PAPER TITLE HERE>`
@@ -1021,7 +1025,7 @@ if(params$private_info) {
         - Add link to the project/record in the master spreadsheet and note the final expected DOI^
         - Wait for final paper citation from publisher and add it to the report
         - Add the to be expected DOI to your report and to the coordination spreadsheet; for OSF, append the project ID of the OSF project in capitals to `10.17605/OSF.IO/` to guess the future DOI; for ResearchEquals, use the DOI displayed in the module draft
-8. _After_ papers are published:
+1. _After_ papers are published:
     - Upload the report and supplemental material created by you, if suitable also the original material (add `LICENSE.md` and licensing information in the OSF project description in that case)
     - Upload a PDF of your report and any useful supplemental files
     - Publish the component/module

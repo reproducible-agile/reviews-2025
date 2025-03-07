@@ -165,7 +165,7 @@ pre code {
 
 <h1 class="title toc-ignore">Reproducibility Review AGILE 2025</h1>
 <h4 class="author">Daniel Nüst, Carlos Granell, Frank Ostermann</h4>
-<h4 class="date">05 March, 2025</h4>
+<h4 class="date">07 March, 2025</h4>
 
 </div>
 
@@ -2761,14 +2761,32 @@ href="https://doi.org/10.17605/OSF.IO/CB7Z8"><em>Reproducibility
 Reviewer Guidelines</em> in the Reproducible Paper Guidelines</a> the
 following steps are just a tl;dr version</li>
 <li>Take a look at the <a
-href="https://github.com/reproducible-agile/reviews-2025/blob/master/report-template/reproreview-template.Rmd">RMarkdown
-review report template</a> - even if you’re not using it, it gives you
-guidance on structure and content, you are welcome to write your report
-with any tool that can produce a PDF</li>
+href="https://github.com/reproducible-agile/reviews-2025/blob/master/report-template/">review
+report templates</a> in RMarkdown and Office (.docx &amp; .odt) - even
+if you’re not using it, it gives you guidance on structure and content;
+you are welcome to write your report with any tool that can produce a
+PDF</li>
 <li>Go to the <a
 href="https://docs.google.com/spreadsheets/d/1q_oOQtv0m5gsKpCtTLhgyfbEMOBCC3dFw6M00mzyNYc/edit?gid=1766356109#gid=1766356109">shared
 spreadsheet reproducibility reviewers</a> and find your assignments</li>
-<li>Conduct your reproducibility review and write the report
+<li>Access your <em>reproducibility package</em> from the <a
+href="https://drive.google.com/drive/folders/1bvNMoBJDfEFOPb4g0d66p7rxd9lwIAV6?usp=drive_link">shared
+cloud folder</a>, which includes the following files named using the
+submission identifier, here using <code>000</code> as example:
+<ul>
+<li><code>000.pdf</code> - the submission manuscript (may be updated
+when authors upload new reports, ideally though you receive revisions
+directly from the authors)</li>
+<li><code>000_authors.html</code> - an HTML file with author names and a
+handy link to write a message to all authors CC’ing the reproducibility
+committee chair(s)</li>
+<li><code>000_reviews.html</code> - the scientific reviews with reviewer
+names redacted - useful to consider to be prepared for upcoming changes
+in the submission and to check for comments on data, code, software, or
+even reproducibility</li>
+</ul></li>
+<li><strong>Conduct your reproducibility review and write the
+report</strong>
 <ul>
 <li>Don’t forget to take a look at the scientific reviews for comments
 on reproducibility; do <em>not</em> worry about the science or read the
@@ -2977,10 +2995,9 @@ href="https://choosealicense.com/licenses/apache-2.0/">Apache License
 ## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8          LC_NUMERIC=C                  LC_TIME=en_US.UTF-8          
-##  [4] LC_COLLATE=en_US.UTF-8        LC_MONETARY=en_US.UTF-8       LC_MESSAGES=en_US.UTF-8      
-##  [7] LC_PAPER=en_US.UTF-8          LC_NAME=en_US.UTF-8           LC_ADDRESS=en_US.UTF-8       
-## [10] LC_TELEPHONE=en_US.UTF-8      LC_MEASUREMENT=en_US.UTF-8    LC_IDENTIFICATION=en_US.UTF-8
+##  [1] LC_CTYPE=en_US.UTF-8          LC_NUMERIC=C                  LC_TIME=en_US.UTF-8           LC_COLLATE=en_US.UTF-8       
+##  [5] LC_MONETARY=en_US.UTF-8       LC_MESSAGES=en_US.UTF-8       LC_PAPER=en_US.UTF-8          LC_NAME=en_US.UTF-8          
+##  [9] LC_ADDRESS=en_US.UTF-8        LC_TELEPHONE=en_US.UTF-8      LC_MEASUREMENT=en_US.UTF-8    LC_IDENTIFICATION=en_US.UTF-8
 ## 
 ## time zone: Etc/UTC
 ## tzcode source: system (glibc)
@@ -2989,23 +3006,22 @@ href="https://choosealicense.com/licenses/apache-2.0/">Apache License
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] tabulapdf_1.0.5-5   glue_1.8.0          rvest_1.0.4         xml2_1.3.7          httr_1.4.7         
-##  [6] kableExtra_1.4.0    googlesheets4_1.1.1 googledrive_2.1.1   quanteda_4.2.0      here_1.0.1         
-## [11] wordcloud_2.6       RColorBrewer_1.1-3  tidytext_0.4.2      lubridate_1.9.4     forcats_1.0.0      
-## [16] dplyr_1.1.4         purrr_1.0.4         readr_2.1.5         tidyr_1.3.1         tibble_3.2.1       
-## [21] ggplot2_3.5.1       tidyverse_2.0.0     stringr_1.5.1       pdftools_3.5.0     
+##  [1] tabulapdf_1.0.5-5   glue_1.8.0          rvest_1.0.4         xml2_1.3.7          httr_1.4.7          kableExtra_1.4.0   
+##  [7] googlesheets4_1.1.1 googledrive_2.1.1   quanteda_4.2.0      here_1.0.1          wordcloud_2.6       RColorBrewer_1.1-3 
+## [13] tidytext_0.4.2      lubridate_1.9.4     forcats_1.0.0       dplyr_1.1.4         purrr_1.0.4         readr_2.1.5        
+## [19] tidyr_1.3.1         tibble_3.2.1        ggplot2_3.5.1       tidyverse_2.0.0     stringr_1.5.1       pdftools_3.5.0     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] fastmatch_1.1-6   gtable_0.3.6      xfun_0.51         bslib_0.9.0       rJava_1.0-11      gargle_1.5.2     
-##  [7] lattice_0.22-6    tzdb_0.4.0        vctrs_0.6.5       tools_4.4.2       generics_0.1.3    curl_6.2.1       
-## [13] janeaustenr_1.0.0 pkgconfig_2.0.3   tokenizers_0.3.0  Matrix_1.7-1      lifecycle_1.0.4   compiler_4.4.2   
-## [19] munsell_0.5.1     htmltools_0.5.8.1 SnowballC_0.7.1   sass_0.4.9        yaml_2.3.10       crayon_1.5.3     
-## [25] pillar_1.10.1     jquerylib_0.1.4   rsconnect_1.3.3   cachem_1.1.0      stopwords_2.3     tidyselect_1.2.1 
-## [31] digest_0.6.37     stringi_1.8.4     rprojroot_2.0.4   fastmap_1.2.0     grid_4.4.2        colorspace_2.1-1 
-## [37] cli_3.6.4         magrittr_2.0.3    withr_3.0.2       scales_1.3.0      timechange_0.3.0  rmarkdown_2.29   
-## [43] qpdf_1.3.4        cellranger_1.1.0  png_0.1-8         askpass_1.2.1     hms_1.1.3         evaluate_1.0.3   
-## [49] knitr_1.49        viridisLite_0.4.2 rlang_1.1.5       Rcpp_1.0.14       selectr_0.4-2     svglite_2.1.3    
-## [55] rstudioapi_0.17.1 jsonlite_1.9.1    R6_2.6.1          systemfonts_1.1.0 fs_1.6.5</code></pre>
+##  [1] fastmatch_1.1-6   gtable_0.3.6      bslib_0.9.0       xfun_0.51         rJava_1.0-11      gargle_1.5.2      lattice_0.22-6   
+##  [8] tzdb_0.4.0        vctrs_0.6.5       tools_4.4.2       generics_0.1.3    parallel_4.4.2    curl_6.2.1        janeaustenr_1.0.0
+## [15] pkgconfig_2.0.3   tokenizers_0.3.0  Matrix_1.7-1      lifecycle_1.0.4   compiler_4.4.2    munsell_0.5.1     sass_0.4.9       
+## [22] SnowballC_0.7.1   htmltools_0.5.8.1 yaml_2.3.10       crayon_1.5.3      jquerylib_0.1.4   pillar_1.10.1     rsconnect_1.3.3  
+## [29] cachem_1.1.0      stopwords_2.3     tidyselect_1.2.1  digest_0.6.37     stringi_1.8.4     rprojroot_2.0.4   fastmap_1.2.0    
+## [36] grid_4.4.2        colorspace_2.1-1  cli_3.6.4         magrittr_2.0.3    utf8_1.2.4        withr_3.0.2       scales_1.3.0     
+## [43] bit64_4.6.0-1     timechange_0.3.0  rmarkdown_2.29    bit_4.5.0.1       qpdf_1.3.4        cellranger_1.1.0  png_0.1-8        
+## [50] askpass_1.2.1     hms_1.1.3         evaluate_1.0.3    knitr_1.49        viridisLite_0.4.2 rlang_1.1.5       Rcpp_1.0.14      
+## [57] selectr_0.4-2     vroom_1.6.5       jsonlite_1.9.1    svglite_2.1.3     rstudioapi_0.17.1 R6_2.6.1          systemfonts_1.1.0
+## [64] fs_1.6.5</code></pre>
 </div>
 
 

@@ -1,9 +1,9 @@
-# AGILE Reproducibility Reviews 2024
+# AGILE Reproducibility Reviews 2025
 
 ## About
 
-This repository contains code used for the organisation and management of the reproducibility review at AGILE 2024.
-Read more about the review process and the reproducibility committee here: <https://reproducible-agile.github.io/2024/>.
+This repository contains code used for the organisation and management of the reproducibility review at AGILE 2025.
+Read more about the review process and the reproducibility committee here: <https://reproducible-agile.github.io/2025/>.
 
 The reproducibility reviews are published on OSF: <https://osf.io/qvr4s/>
 

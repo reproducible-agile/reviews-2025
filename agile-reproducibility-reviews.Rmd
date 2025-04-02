@@ -999,6 +999,7 @@ if(params$private_info) {
     - `000.pdf` - the submission manuscript (may be updated when authors upload new reports, ideally though you receive revisions directly from the authors)
     - `000_authors.html` - an HTML file with author names and a handy link to write a message to all authors CC'ing the reproducibility committee chair(s)
     - `000_reviews.html` - the scientific reviews with reviewer names redacted - useful to consider to be prepared for upcoming changes in the submission and to check for comments on data, code, software, or even reproducibility
+1. **Contact the author(s)**, e.g., using one of the template below; in the first email it makes sense to use all authors' contact emails that are mentioned in the paper, even if there is one "corresponding author" listed, because we do not have the time to possibly wait for someone who is not available anymore, and it also helps with getting attention; in future communications, you can reply to the person who got back to you and kindly ask them to keep in the loop (or in CC) who needs to be kept there. 
 1. **Conduct your reproducibility review and write the report**
     - Don't forget to take a look at the scientific reviews for comments on reproducibility; do _not_ worry about the science or read the full paper, unless it really interests you
     - Check the authors and their affiliations of the submission - is there a relation (e.g., former colleague, current supervisor) that may be seen as inappropriate for you as a reproducibility reviewer? Is there a conflict of interest? If so, please contact the reproducibility chair, and ask via email to the committee members if another reproducibility reviewer would be available to switch assignments
@@ -1093,6 +1094,24 @@ The scientific reviewers <SELECT: have, have not> note that your paper does not 
 Refer to the AGILE Reproducible Paper Guidelines (https://osf.io/cb7z8/) for detailed information and possible DASA section statements. Please don't hesitate to get in touch with me if you have any questions!
 
 In your manuscript you state that both code and data cannot be shared due to licensing issues. Is it possible for you to provide a synthetic dataset or subset and the code in order for us to reproduce your methodology?
+
+Kind regards,
+<NAME>
+
+AGILE Reproducibility Committee 2025
+```
+
+#### Initial contact
+
+```
+Dear <authors>,
+
+congratulations on the acceptance of your submission <TITLE> as an AGILE 2025 full paper.
+
+I am assigned as reproducibility reviewer to your paper and would kindly ask you to share a non-anonymised version of your manuscript, or simply share the redacted URL from your manuscript. It would be great to get this as soon as possible to begin the evaluation of the reproducibility.
+
+The reproducibility review is an optional but highly recommended review step before publication, because in case of a successful reproduction of your work, the paper receives an AGILE reproducibility badge (added to the actual publication on the publisher’s site) and chances are increased that readers will engage (and cite) your work. All reproducibility reviews have to happen in a narrow time window due to the conference proceedings having to be ready for the conference. For more information, I refer you to the reproducibility guidelines of the conference.
+If you have any questions regarding AGILE's reproducibility review, please do not hesitate to ask! 
 
 Kind regards,
 <NAME>

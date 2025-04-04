@@ -71,11 +71,14 @@ The authors provided a link to an online repo with several data files which seem
 
 The Data and Software Availability (DASA) section of the paper provides the starting point for this review.
 
-For the data for the water areas in Figure 4, the DASA points to the generic download page of Geofabrik at https://download.geofabrik.de/, which is not helpful since the lake is not identified precisely by name nor coordinates in the article.
-Since Figure 4 is mostly a map providing context, this is unfortunate but not critical, though sharing the map file for the Figure would be trivial.
+For the data for the water areas in Figure 4, the DASA points to the generic download page of Geofabrik at https://download.geofabrik.de/, which is not helpful since the lake is not identified precisely by name nor coordinates in the first submitted version - this was deanonymised by the authors during the reproducibility review.
+Since Figure 4 is mostly a map providing context, this is unfortunate but not critical, though sharing the map file or creating it with code would be readily possible.
 
-The DASA mentions a URL, which was provided by the authors after contacting them, of a Figshare record: <https://figshare.com/s/90b5d7623e46e288eb2e>.
-The record contains a README describing the following contents.
+The DASA mentions an anonymised URL, which was provided by the authors after contacting them, of a Figshare record, namely <https://figshare.com/s/90b5d7623e46e288eb2e>, which was eventually published with the following DOI and full citation:
+
+> Nuhn, Eva (2025). Dataset for AGILE paper "Measuring Landmark Salience in Rural Areas: A Comparative Study of Two Models". figshare. Dataset. <https://doi.org/10.6084/m9.figshare.28545578.v1>
+
+The record contains a README describing the following contents:
 
 - `Folder Figure 4`: contains several shapefiles that could be loaded in QGIS and indeed provide the data for Figure 4, see map below.
 - `Intersection`: Images of the 10 intersections shown to survey participants
@@ -116,35 +119,8 @@ No detailed evaluation of the formulae within the spreadsheet was conducted.
 ## Recommendations
 
 - Provide data in a more sustainable data format than ShapeFile, e.g., GeoPackage or also as a text-based format such as GeoJSON, since geographic precision is not an issue here
-- The spreadsheet-based calculations require knowledge of the used models and are not readily accessible for evaluation - I understand there are limitations here, but for the sake of documentation, something like a codebook or textual descriptions of the formulae, or even linking to the original papers, could be helpful
-- Please don't forget to set the Figshare record to public and get a DOI (and cite that in the paper)
+- The spreadsheet-based calculations require knowledge of the used models and are not readily accessible for evaluation - I understand there are limitations here, but for the sake of documentation, something like a codebook or textual descriptions of the formulas, or even linking to the original papers, could be helpful
 
 ```{r, echo=FALSE, eval=FALSE, results='hide'}
-# create ZIP of reproduction files and upload to OSF
-library("zip")
-
-zipfile <- here::here("PATH/reproreview_AGILE-2025_08.zip")
-file.remove(zipfile)
-zip::zipr(zipfile,
-          here::here("fig4-qgis.png"),
-          here::here("fig7-spreadsheet.png"),
-          here::here("figure-4-reproduction.qgz"),
-          here::here("table2-mcnemar.png"))
-
-library("osfr") # See docs at https://docs.ropensci.org/osfr/
-# OSF_PAT is in .Renviron in parent directory
-# We cannot use osfr to create a new component (with osfr::osf_create_component(x = osfr::osf_retrieve_node(".."), ...) because that will set the storage location to outside Europe.
-
-# retrieve project
-project <- osfr::osf_retrieve_node("we3ps")
-
-# upload files
-osfr::osf_upload(x = project,
-                 conflicts = "overwrite",
-                 path = c(list.files(here::here("PATH"),
-                                     pattern = "reproreview_.*(pdf$|Rmd$|zip$)",
-                                     full.names = TRUE),
-                          "COPYRIGHT"
-                          )
-                 )
+# upload PDF as main file and the other files as supporting files to to https://www.researchequals.com/drafts?suffix=wxh7-8yjd
 ```

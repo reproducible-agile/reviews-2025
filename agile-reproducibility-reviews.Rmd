@@ -1018,8 +1018,11 @@ if(params$private_info) {
             - set the category of repository to "Other"
     - **On ResearchEquals**
         - Use the type "Reproducibility Report"
-        - Add the reproducibility report as the main file
         - Keep the project as a **draft** until the publication of the paper (we don't want to announce anything that is not our place to announce)
+        - Add the reproducibility report as the main file after adding the paper's final citation
+        - Add any additional files as "Supporting files" to the module
+        - Add datasets with a DOI to the "Reference list"
+        - Add the final paper to the "Reference list" using the DOI
         - Add all _contributors_ to the review to the module as authors (need to have an account on ResearchEquals)
     - **On both**
         - Copy the summary from the report to the description field of the project

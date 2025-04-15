@@ -62,8 +62,8 @@ ADD FULL CITATION
 
 # Summary
 
-The reproduction was partially successful. I could not re-run LLM-prmompting and fine-tuning due to resource restrictions (time, specific hardware needed) but could run the visualisations and analysis based on the provided intermediate data files, which are all published in an OSF project and well documented.
-All but two figures from the paper were successfully recreated using a provided Jupyter Notebook with a corresponding runtime environment specification.
+The reproduction was partially successful. I could not re-run LLM-prompting and fine-tuning due to resource restrictions (time, specific hardware needed) but could run the visualisations and analysis based on the provided intermediate data files, which are all published in an OSF project and well documented.
+All figures and statistics from the paper were successfully recreated using two provided Jupyter Notebooks using Jupyter Lab with a corresponding runtime environment specification for Python.
 
 \clearpage
 
@@ -104,17 +104,21 @@ jupyter lab
 I open the **analysis notebook** and click on "Restart the kernel and run all cells".
 This completes in a minute or so.
 I get a few runtime warnings and deprecation notices, but those do not seem to be critical.
-I successfully recreate most Figures from the paper, most easily identified by the line of code saving it to the results plots directory (`fig.savefig(...pdf')`), see Figures below.
+I successfully recreates all figures from the paper, most easily identified by the line of code saving it to the results plots directory (`fig.savefig(...pdf')`), see Figures 1 to 6 below.
 
-There are two differences:
+There are two differences, both of which could be fixed by an update from the authors but are noted here for the sake of completeness:
 
-* Figure 2 is missing.
-* Figure 4: the first subplot in the right-hand row is for "Holborn", and not for "Bank" as in the manuscript. I can quickly fix the underlying hexagons to "Bank" by changing the name of the attraction, but I don't know which transit lines should be shown for "Bank".
+* ~~Figure 2 is missing.~~ The code chunk is in the notebook, but the figure is not saved to PDF. I added the line `fig.savefig('results/plots/Figure-2.pdf')`.
+* ~~Figure 4: the first subplot in the right-hand row is for "Holborn", and not for "Bank" as in the manuscript. I can quickly fix the underlying hexagons to "Bank" by changing the name of the attraction, but I don't know which transit lines should be shown for "Bank".~~
 
 I upload the figures created by my as supporting files to the reproducibility review record.
 
 ```{r fig1, out.width="0.75\\linewidth", include=TRUE, fig.align="center", fig.cap=c("Recreation of Figure 1"), echo=FALSE}
 knitr::include_graphics(here::here("osfstorage-archive/results/plots/property_distribution.pdf"))
+```
+
+```{r fig2, out.width="0.75\\linewidth", include=TRUE, fig.align="center", fig.cap=c("Recreation of Figure 2"), echo=FALSE}
+knitr::include_graphics(here::here("osfstorage-archive/results/plots/Figure-2.pdf"))
 ```
 
 ```{r fig3, out.width="0.5\\linewidth", include=TRUE, fig.align="center", fig.cap=c("Recreation of Figure 3"), echo=FALSE}
@@ -135,6 +139,8 @@ knitr::include_graphics(here::here("osfstorage-archive/results/plots/PTAL_std_di
 
 The **validation notebook** also can be re-run completely.
 The statistics that are calculated based on the provided evaluation data match the values in the paper: `MICRO METRICS` are shown in Table 1, the error sources are given in Table 2, and further numbers for the post processing fuzzy matching are given on page 6 in the text.
+
+\newpage
 
 ## Recommendations
 

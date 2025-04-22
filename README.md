@@ -20,6 +20,7 @@ To work on the main R Markdown file, `agile-reproducibility-reviews.Rmd`, which 
 ```bash
 make
 ```
+
 The `Makefile`'s default target will create a virtual Python environment to execute [`repo2docker`](https://repo2docker.readthedocs.io/) using the files in this repository, notably `install.R` where you must add required R packages, and the `Dockerfile` where all system dependencies and remaining software is installed and configured.
 
 ### 2. Start RStudio

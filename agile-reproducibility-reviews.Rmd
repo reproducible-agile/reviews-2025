@@ -1029,24 +1029,27 @@ if(params$private_info) {
         - Add link to the project/record in the master spreadsheet and note the final expected DOI^
         - Wait for final paper citation from publisher and add it to the report
         - Add the to be expected DOI to your report and to the coordination spreadsheet; for OSF, append the project ID of the OSF project in capitals to `10.17605/OSF.IO/` to guess the future DOI; for ResearchEquals, use the DOI displayed in the module draft
-1. _After_ papers are published:
-    - Upload the report and supplemental material created by you, if suitable also the original material (add `LICENSE.md` and licensing information in the OSF project description in that case)
-    - Upload a PDF of your report and any useful supplemental files
+1. **_After_ papers are published:**
+    - Upload the report as a single PDF document and supplemental material created by you
+    - Upload, if suitable, also the original material (add `LICENSE.md` and licensing information in the OSF project description in that case)
     - Double check that only the contributing people are listed as bibliographic contributors on the project (committee chairs are welcome to be non-bibliographic administrators for organisational purposes)
     - Publish the component/module
-    - On OSF
+    - **On OSF**
         - Mint a DOI (double check if it is correct in the report)
+        - Create an "Open-ended" registration to snapshot the status of the OSF component/project
 
 ### Reproducibility chair instructions
 
 1. Create a repository like this one based on the previous year
 1. Screen the accepted papers
 1. Distribute the reproductions amongst the committee members
-1. After report publication
+1. Support during reproductions, give feedback, advise on issues, ...
+1. After reports publication
     - Add reports on ResearchEquals to the collections [Reproducible AGILE](https://doi.org/10.53962/nxah-m4) and [CODECHECK](https://doi.org/10.53962/qtrx-1a)
     - Coordinate on the creation of `codecheck.yml` configuration files
     - Add the reports to the CODECHECK register
     - "Archive" the projects on GitHub so that they becomee read-only ([instructions GitHub](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-archiving-repositories), [instructions for GitLab](https://docs.gitlab.com/ee/user/project/settings/#archiving-a-project))
+    - Double check all OSF projects have a DOI and a registration
 
 ### Email templates for contacting authors
 

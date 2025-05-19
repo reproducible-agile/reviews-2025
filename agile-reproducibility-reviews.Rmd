@@ -694,6 +694,13 @@ The report should be based on a template from this repository in [`report-templa
 
 `r if(!params$private_info) {"<!--"}`
 
+### Forming the reproducibility committee
+
+Send an email to participate in the committee before the deadline reminders for full papers.
+
+- Directly to all members of previous years' reproducibility committees
+- To AGILE Community Mailing List: <mailto:agile-community@googlegroups.com>
+
 ### Prepare reproducibility packages for reviewers
 
 #### Overview and files
@@ -960,7 +967,7 @@ if (params$private_info) {
                             path = submissions_and_reviews)
   })
   
-  # upload reviewe and contact information
+  # upload review and contact information
   sapply(list.files(review_files_path, pattern = "reviews", full.names = TRUE), function(the_file) {
      googledrive::drive_put(media = the_file,
                             name = basename(the_file),
@@ -980,10 +987,12 @@ if (params$private_info) {
 if(params$private_info) {
   googlesheets4::range_read(
     ss = "https://docs.google.com/spreadsheets/d/1q_oOQtv0m5gsKpCtTLhgyfbEMOBCC3dFw6M00mzyNYc/edit",
-    range =  "review_data!A:F"
+    range =  "review_data!A:F",
+    col_types = "c"
     ) %>%
-    select(`ID`, `Title`, `Report DOI`) %>%
-    filter(!is.na(`Report DOI`)) %>%
+    select(`ID`, `Title`, `Report DOI URL`) %>%
+    filter(!is.na(`ID`)) %>%
+    filter(!is.na(`Report DOI URL`)) %>%
     write.csv(paste("AGILE-Reproducibility-Review", lubridate::year(lubridate::now()), "_report-DOIs.csv"), row.names = FALSE)
 }
 ```

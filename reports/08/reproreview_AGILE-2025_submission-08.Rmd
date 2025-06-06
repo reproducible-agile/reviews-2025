@@ -51,14 +51,14 @@ knitr::include_graphics(temp)
 
 This report is part of the reproducibility review at the AGILE conference.
 For more information see [https://reproducible-agile.github.io/](https://reproducible-agile.github.io/).
-This document is published on OSF at TODO OSF LINK HERE.
+This document is published on ResearchEquals at <https://doi.org/10.53962/wxh7-8yjd>.
 To cite the report use
 
-> TODO FULL REPORT CITATION HERE
+> Nüst, D. (2025). Reproducibility review of: Measuring Landmark Salience in Rural Areas: A Comparative Study of Two Models. In ResearchEquals. Liberate Science GmbH. <https://doi.org/10.53962/wxh7-8yjd>
 
 # Reviewed paper
 
-TODO ADD FULL CITATION
+Nuhn, E., Ehrig, M., Engemann, L., Heißerer, F., Maltan, J., Ruf,  J., and Timpf,  S.: Measuring Landmark Salience in Rural Areas: A Comparative Study of Two Models, AGILE GIScience Ser., 6, 7, <https://doi.org/10.5194/agile-giss-6-7-2025>, 2025.
 
 # Summary
 

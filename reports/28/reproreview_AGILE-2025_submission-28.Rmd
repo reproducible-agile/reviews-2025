@@ -51,14 +51,14 @@ knitr::include_graphics(temp)
 
 This report is part of the reproducibility review at the AGILE conference.
 For more information see [https://reproducible-agile.github.io/](https://reproducible-agile.github.io/).
-This document is published on OSF at OSF LINK HERE.
+This document is published on ResearchEquals at <https://doi.org/10.53962/wgtb-cagt>.
 To cite the report use
 
-> FULL REPORT CITATION HERE
+> Nüst, D. (2025). Reproducibility review of: How close is "close"? An analysis of the spatial characteristics of perceived proximity in AirBnB property descriptions using Large Language Models. In ResearchEquals. Liberate Science GmbH. <https://doi.org/10.53962/wgtb-cagt>
 
 # Reviewed paper
 
-ADD FULL CITATION
+Shingleton, J. and Basiri, A.: How close is "close"? An analysis of the spatial characteristics of perceived proximity using Large Language Models, AGILE GIScience Ser., 6, 11, <https://doi.org/10.5194/agile-giss-6-11-2025>, 2025.
 
 # Summary
 

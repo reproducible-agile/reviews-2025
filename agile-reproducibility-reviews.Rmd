@@ -1039,13 +1039,15 @@ if(params$private_info) {
         - Wait for final paper citation from publisher and add it to the report
         - Add the to be expected DOI to your report and to the coordination spreadsheet; for OSF, append the project ID of the OSF project in capitals to `10.17605/OSF.IO/` to guess the future DOI; for ResearchEquals, use the DOI displayed in the module draft
 1. **_After_ papers are published:**
-    - Upload the report as a single PDF document and supplemental material created by you
-    - Upload, if suitable, also the original material (add `LICENSE.md` and licensing information in the OSF project description in that case)
+    - Upload the report as a single PDF document and include in it the final citation for your report and the full reference to the (to be) published paper provided by the publisher; add supplemental material created by you
+    - Upload, if suitable/applicable, also the original material (add `LICENSE.md` and licensing information in the OSF project description in that case) if confirmed by the author
     - Double check that only the contributing people are listed as bibliographic contributors on the project (committee chairs are welcome to be non-bibliographic administrators for organisational purposes)
     - Publish the component/module
     - **On OSF**
-        - Mint a DOI (double check if it is correct in the report)
-        - Create an "Open-ended" registration to snapshot the status of the OSF component/project
+        - [Create a DOI](https://help.osf.io/article/220-create-dois) (double check if it is correct in the report)
+        - _Wait for a hint from the reproducibility editor_ to create an "Open-ended" registration to snapshot the status of the OSF component/project (your project likely still needs the CODECHECK configuration file, see below in the chair instructions)
+    - **On ResearchEquals**
+        - _Make a note_ that you revisit the module after the publication of the article so you can add the published paper to the module's "Reference list"
 
 ### Reproducibility chair instructions
 
@@ -1055,9 +1057,10 @@ if(params$private_info) {
 1. Support during reproductions, give feedback, advise on issues, ...
 1. After reports publication
     - Add reports on ResearchEquals to the collections [Reproducible AGILE](https://doi.org/10.53962/nxah-m4) and [CODECHECK](https://doi.org/10.53962/qtrx-1a)
-    - Coordinate on the creation of `codecheck.yml` configuration files
+    - Coordinate on the creation of [`codecheck.yml` configuration files](https://codecheck.org.uk/spec/config/1.0/)
     - Add the reports to the CODECHECK register
-    - "Archive" the projects on GitHub so that they becomee read-only ([instructions GitHub](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-archiving-repositories), [instructions for GitLab](https://docs.gitlab.com/ee/user/project/settings/#archiving-a-project))
+    - After adding the reports to the CODECHECK register successfully, send a note to the reproducibility reviewers that they can create the Registration
+    - "Archive" the projects on GitHub so that they become read-only ([instructions GitHub](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-archiving-repositories), [instructions for GitLab](https://docs.gitlab.com/ee/user/project/settings/#archiving-a-project))
     - Double check all OSF projects have a DOI and a registration
 
 ### Email templates for contacting authors

@@ -1,0 +1,31 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/69"
+paper:
+  title: "Measuring Landmark Salience in Rural Areas: A Comparative Study of Two Models"
+  authors:
+    - name: Eva Nuhn
+      ORCID: 0000-0003-2443-8122
+    - name: Michaela Ehrig
+    - name: Leonie Engemann
+    - name: Fabian Heißerer
+    - name: Julia Maltan
+    - name: Jenny Ruf
+    - name: Sabine Timpf
+      ORCID: 0000-0002-7964-4110
+  reference: https://doi.org/10.5194/agile-giss-6-7-2025
+
+codechecker:
+  - name: Daniel Nüst
+    ORCID: 0000-0002-0024-5046
+
+report: https://doi.org/10.53962/wxh7-8yjd
+summary: |
+  The reproduction of the visualisations and statistics presented in the manuscript was successful.
+  The authors provided a link to an online repo with several data files which seem to have been the basis for the illustrative map in the paper, as well as a spreadsheet which includes the model calculations, plots, and statistical tests presented in the paper.
+repository: https://doi.org/10.6084/m9.figshare.28545578.v1
+check_time: "2025-06-06 14:00:00"
+certificate: 2025-008

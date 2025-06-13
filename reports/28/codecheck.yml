@@ -1,0 +1,26 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/69"
+paper:
+  title: 'How close is "close"? An analysis of the spatial characteristics of perceived proximity using Large Language Models'
+  authors:
+    - name: Joseph Shingleton 
+      ORCID: 0000-0002-1628-3231
+    - name: Ana Basiri
+      ORCID: 0000-0002-2399-1797
+  reference: https://doi.org/10.5194/agile-giss-6-11-2025
+
+codechecker:
+  - name: Daniel Nüst
+    ORCID: 0000-0002-0024-5046
+
+report: https://doi.org/10.53962/wgtb-cagt
+summary: |
+  The reproduction was partially successful. I could not re-run LLM-prompting and fine-tuning due to resource restrictions (time, specific hardware needed) but could run the visualisations and analysis based on the provided intermediate data files, which are all published in an OSF project and well documented.
+  All figures and statistics from the paper were successfully recreated using two provided Jupyter Notebooks using Jupyter Lab with a corresponding runtime environment specification for Python.
+repository: https://osf.io/r3ep7/?view_only=b4783a1d8dcc47109650a7eff0bc662e
+check_time: "2025-06-06 14:00:00"
+certificate: 2025-017

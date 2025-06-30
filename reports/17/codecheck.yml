@@ -1,0 +1,39 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
+
+paper:
+  title: "An Efficient System for Automatic Map Storytelling: A Case Study on Historical Maps"
+  authors:
+    - name: Ziyi Liu
+      ORCID: 0000-0003-2198-7708
+    - name: Claudio Affolter
+    - name: Sidi Wu
+      ORCID: 0000-0003-1669-6690
+    - name: Yizi Chen
+      ORCID: 0000-0003-1637-0092
+    - name: Lorenz Hurni
+      ORCID: 0000-0002-0453-8743
+  reference: https://doi.org/10.5194/agile-giss-6-5-2025
+
+codechecker:
+  - name: Sophie Teichmann
+
+report: https://doi.org/10.17605/OSF.IO/GT5BW
+summary: |
+  The main challenge during this reproduction is the combination of a closed source model (Chat GPT) and available models (like CLIP).
+  Using the models provided by the authors, the results were reproducible (Recreated Table 2).
+  Using Ubuntu the results were partly not recreatable on Ubuntu.
+  On Windows the training was successful.
+  Thus, there is a system dependence of the reproducibility when retraining the models.
+  Another challenge was the volume of models and corresponding inference.
+  Thus I only chose a subset of models to retrain and perform inference on.
+  A part of the inference in the paper was done manually in the paper, which I was not able to recreate.
+  I was able to fully recreate Table1, Table 3, Table 5, Table 6 and Table 7 from the original paper.
+  I would count the overall reproduction as a success.
+repository: https://github.com/STeichmann/automatic-map-storytelling
+check_time: "2025-06-12 12:00:00"
+certificate: 2025-011

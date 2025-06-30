@@ -1,0 +1,25 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
+
+paper:
+  title: "Mining Meaningful Facets in Spatial Information Retrieval with Spatial Relevance Feedback"
+  authors:
+    - name: Martin Werner
+      ORCID: 0000-0002-6951-8022
+  reference: https://doi.org/10.5194/agile-giss-6-12-2025
+
+codechecker:
+  - name: Sophie Teichmann
+
+report: https://doi.org/10.17605/OSF.IO/956a8
+summary: |
+  The author provided clear steps for the partial reproduction.
+  However, due to computational and privacy constraints, only two basic examples could be reproduced.
+  Since those two minimal examples demonstrate both new methods introduced in the paper, I would consider the partial reproduction to be successful.
+repository: https://github.com/reproducible-agile/spatial_facet_search
+check_time: "2025-06-12 12:00:00"
+certificate: 2025-012

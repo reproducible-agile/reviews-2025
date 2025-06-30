@@ -3,7 +3,7 @@ version: https://codecheck.org.uk/spec/config/1.0/
 
 manifest:
   - file: NA
-    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/69"
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
 paper:
   title: "Measuring Landmark Salience in Rural Areas: A Comparative Study of Two Models"
   authors:

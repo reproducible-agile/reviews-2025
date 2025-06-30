@@ -1,0 +1,37 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
+paper:
+  title: "Accessibility for pedestrians under heat stress - the example of Heidelberg, Germany "
+  authors:
+    - name: Johannes Huber
+    - name: Christina Ludwig
+      ORCID: 0000-0003-4669-3298
+    - name: Kathrin Foshag
+      ORCID: 0000-0002-8610-2563
+    - name: Nikolaos Kolaxidis
+      ORCID: 0009-0008-8406-2028
+    - name: Alexander Zipf
+      ORCID: 0000-0003-4916-9838
+    - name: Sven Lautenbach
+      ORCID: 0000-0003-1825-9996
+  reference: https://doi.org/10.5194/agile-giss-6-4-2025
+
+codechecker:
+  - name: Lorena Abad
+    ORCID: 0000-0003-0554-734X
+
+report: https://doi.org/10.17605/OSF.IO/CHX28
+summary: |
+  The authors included a DASA section on the paper with an anonymous GitHub link to the repository with the code for the reproduction.
+  After initial contact with the authors, the unanonymized link to the GitHub repository was obtained and forked into the reproducible AGILE organization.
+  The repository prepared by the authors has clear instructions on reproducibility for the Jupyter notebooks and points to the included QGIS project to recreate Figures 2-4. Figure 5 is the result of one of the notebooks (lcz_analysis.pynb).
+  Initially, the code limited the AOI to a subset for testing purposes. This was not initially clear from the documentation, but contacting the authors clarified the discrepancies.
+  For this report, the code was successfully run for the whole AOI.
+  Figures 2 to 5 could also be successfully reproduced besides manual edits in Figure 5.
+repository: https://doi.org/10.6084/m9.figshare.28545578.v1
+check_time: "2025-05-06 12:00:00"
+certificate: 2025-015

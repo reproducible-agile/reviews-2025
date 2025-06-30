@@ -1,0 +1,31 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
+
+paper:
+  title: "3D Land Use Planning: Making Future Cities Measurable with Ontology-Driven Representations of Planning Regulations"
+  authors:
+    - name: Ayda Grišiūtė
+      ORCID: 0000-0001-7328-847X
+    - name: Martin Raubal
+      ORCID: 0000-0001-5951-6835
+    - name: Pieter Herthogs
+      ORCID: 0000-0003-2262-8374
+  reference: https://doi.org/10.5194/agile-giss-6-3-2025
+
+codechecker:
+  - name: Luke McQuade
+    ORCID: 0009-0004-5292-6793
+
+report: https://doi.org/10.17605/OSF.IO/gv2z4
+summary: |
+  A partial reproduction, using intermediate results provided by the authors, was successfully achieved.
+  Table and figure content were generated and materially match with those in the paper.
+  Some minor code changes to match my environment were needed.
+  I initially attempted a full reproduction, but had to abandon this due to time constraints.
+repository: https://github.com/mie-lab/3d-landuse-planning
+check_time: "2025-03-23 12:00:00"
+certificate: 2025-010

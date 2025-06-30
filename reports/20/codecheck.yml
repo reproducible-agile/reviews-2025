@@ -1,0 +1,28 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
+
+paper:
+  title: "Exploring Urban Place Function through User-Generated Textual Content"
+  authors:
+    - name: Shahreen Muntaha Nawfee
+      ORCID: 0000-0001-6154-8537
+    - name: Stefano De Sabbata
+      ORCID: 0000-0002-2750-7579
+    - name: Nicholas Tate
+      ORCID: 0009-0004-7648-5785
+  reference: https://doi.org/10.5194/agile-giss-6-6-2025
+
+codechecker:
+  - name: Ilya Ilyankou
+    ORCID: 0009-0008-7082-7122
+
+report: https://doi.org/10.17605/OSF.IO/BGY83
+summary: |
+  The manuscript was partially reproducible, with three of seven figures recreated with some deviations, likely due to unset random states in the computational process. The remaining figures and tables could not be reproduced in this process due to code issues; the GitHub repository contained 16 code files but lacked sufficient documentation for navigating the complex workflow. While the code can be run on standard hardware with common Python and R libraries, there are no instructions on setup or library versioning. Communication with the authors (17 emails over ~10 days) was necessary to obtain intermediate data files and clarify the process.
+repository: https://github.com/reproducible-agile/Exploring-Urban-Place-Function-through-User-Generated-Textual-Content
+check_time: "2025-06-12 12:00:00"
+certificate: 2025-013

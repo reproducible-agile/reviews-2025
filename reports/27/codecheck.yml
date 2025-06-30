@@ -1,0 +1,32 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
+paper:
+  title: "Changes in Road Centrality and Hospital Access Redundancy: Impacts of the 2024 Flood in the Metropolitan Core of Porto Alegre, Brazil"
+  authors:
+    - name: Ricardo Ruiz Sánchez
+      ORCID: 0009-0000-6108-3389
+    - name: Marcel Reinmuth
+      ORCID: 0000-0002-0204-5101
+    - name: Cristian Albornoz
+      ORCID: 0000-0002-5476-2508
+    - name: Sven Lautenbach
+      ORCID: 0000-0003-1825-9996
+    - name: Alexander Zipf
+      ORCID: 0000-0003-4916-9838
+  reference: https://doi.org/10.5194/agile-giss-6-10-2025
+
+codechecker:
+  - name: Barbara Hofer
+    ORCID: 0000-0001-7078-3766
+
+report: https://doi.org/10.17605/OSF.IO/28JT4
+summary: |
+  Partial reproduction with a focus on the analysis part presented in the paper.
+  Excellent exchange with the authors that allowed a successful reproduction; meanwhile material to reproduce the preprocessing of data has been shared by the authors as well.
+repository: https://github.com/rruiz-s/agile-gscience-2024-rs-flood
+check_time: "2025-06-06 12:00:00"
+certificate: 2025-016

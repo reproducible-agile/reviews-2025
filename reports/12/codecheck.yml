@@ -1,0 +1,30 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
+
+paper:
+  title: "Mobility Vitality in Active and Micro-Mobility Modes: Measuring Urban Vitality Through Spatiotemporal Similarity"
+  authors:
+    - name: Dan Qiang
+      ORCID: 0000-0002-7483-2681
+    - name: Grant McKenzie
+      ORCID: 0000-0003-3247-7777
+  reference: https://doi.org/10.5194/agile-giss-6-9-2025
+
+codechecker:
+  - name: Nina Wiedemann
+    ORCID: 0000-0002-8160-7634
+
+report: https://doi.org/10.17605/OSF.IO/gv2z4
+summary: |
+  The paper comes with a GitHub repository that includes all code to reproduce the figures in the paper from the raw data.
+  However, part of the data can not be shared.
+  While they are available via an API, the time to collect the data is not feasible within the reproducibility review.
+  Using only the available data, the corresponding figures could be successfully reproduced after minor code fixes done upon request.
+  Overall, the paper is partly reproducible.
+repository: https://github.com/ptal-io/Mobility_Vitality
+check_time: "2025-06-13 12:00:00"
+certificate: 2025-009

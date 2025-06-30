@@ -1,0 +1,30 @@
+---
+version: https://codecheck.org.uk/spec/config/1.0/
+
+manifest:
+  - file: NA
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
+
+paper:
+  title: "Beyond Walking and Biking: Expanding the 15-Minute City Area through Public Transport"
+  authors:
+    - name: Manuela Canestrini
+      ORCID: 0009-0005-1501-8398
+    - name: Ioannis Giannopoulos
+      ORCID: 0000-0002-2556-5230
+  reference: https://doi.org/10.5194/agile-giss-6-2-2025
+
+codechecker:
+  - name: Carlos Granell
+    ORCID: 0000-0003-1004-9695
+
+report: https://doi.org/10.17605/OSF.IO/st98a
+summary: |
+  The authors included a DASA section where they briefly but accurately describe key details of the datasets used, software version and scripts generated, and how to access these resources.
+  While the link to the code and data repository was anonymized, the author provided the DOI to the data/code repository for reproduction which will be included in the final version of the paper: https://doi.org/10.48436/0cffc-hax39.
+  Tables 1-3 and Figures 1-5 were eligible for reproduction.
+  All of them were successfully reproduced.
+  In general, the paper is fully reproducible because I was able to verify the claims and results presented in the article by re-executing the scripts provided with the accompanying datasets.
+repository: https://doi.org/10.48436/0cffc-hax39
+check_time: "2025-04-03 12:00:00"
+certificate: 2025-014

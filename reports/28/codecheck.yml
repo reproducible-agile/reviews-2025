@@ -3,7 +3,7 @@ version: https://codecheck.org.uk/spec/config/1.0/
 
 manifest:
   - file: NA
-    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/69"
+    comment: "The AGILE 2025 Reproducibility Review did not include manifest documentation, see https://github.com/codecheckers/register/issues/147"
 paper:
   title: 'How close is "close"? An analysis of the spatial characteristics of perceived proximity using Large Language Models'
   authors:

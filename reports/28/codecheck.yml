@@ -17,7 +17,7 @@ codechecker:
   - name: Daniel Nüst
     ORCID: 0000-0002-0024-5046
 
-report: https://doi.org/10.53962/wgtb-cagt
+report: https://doi.org/10.53962/yckj-53e8
 summary: |
   The reproduction was partially successful. I could not re-run LLM-prompting and fine-tuning due to resource restrictions (time, specific hardware needed) but could run the visualisations and analysis based on the provided intermediate data files, which are all published in an OSF project and well documented.
   All figures and statistics from the paper were successfully recreated using two provided Jupyter Notebooks using Jupyter Lab with a corresponding runtime environment specification for Python.

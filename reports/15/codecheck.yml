@@ -13,14 +13,14 @@ paper:
     - name: Martin Raubal
       ORCID: 0000-0001-5951-6835
     - name: Pieter Herthogs
-      ORCID: 0000-0003-2262-8374
+      ORCID: 0000-0003-2562-8374
   reference: https://doi.org/10.5194/agile-giss-6-3-2025
 
 codechecker:
   - name: Luke McQuade
     ORCID: 0009-0004-5292-6793
 
-report: https://doi.org/10.17605/OSF.IO/gv2z4
+report: https://doi.org/10.17605/OSF.IO/fxkws
 summary: |
   A partial reproduction, using intermediate results provided by the authors, was successfully achieved.
   Table and figure content were generated and materially match with those in the paper.
